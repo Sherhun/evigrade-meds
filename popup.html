@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Evigrade Meds</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="icons/icon48.png" alt="" class="logo">
+    <div>
+      <h1 id="popupTitle">Evigrade Meds</h1>
+      <p id="popupSubtitle" class="subtitle">Educational reference</p>
+    </div>
+  </header>
+
+  <div class="quick-disclaimer" id="quickDisclaimer">
+    Educational reference only. Does not replace a healthcare professional.
+  </div>
+
+  <!-- Health profile: pregnancy / lactation toggle.
+       Same pattern as the Skin extension popup. Stored in
+       chrome.storage.local under the "healthProfile" key (GDPR Art. 9,
+       device-only — never sync to Google). Toggling broadcasts a
+       message so the overlay on retailer pages re-renders right away. -->
+  <div id="health-filters" class="health-filters">
+    <button id="health-pregnancy" class="health-btn" type="button">
+      <span class="health-icon" aria-hidden="true">⚠</span>
+      <span id="healthPregnancyLabel">Pregnancy</span>
+    </button>
+    <button id="health-lactation" class="health-btn" type="button">
+      <span class="health-icon" aria-hidden="true">⚠</span>
+      <span id="healthLactationLabel">Breastfeeding</span>
+    </button>
+  </div>
+
+  <main id="mainContent">
+    <div class="state state-scanning" id="stateScanning">
+      <div class="spinner"></div>
+      <p id="scanningText">Scanning page…</p>
+    </div>
+
+    <div class="state state-notfound hidden" id="stateNotFound">
+      <p id="notFoundText">No medication or supplement identified on this page.</p>
+      <p class="hint" id="notFoundHint">Open a product page on iHerb, Amazon Supplements, or a supported retailer.</p>
+    </div>
+
+    <div class="state state-found hidden" id="stateFound">
+      <div class="ingredient-card" id="ingredientCard"></div>
+    </div>
+  </main>
+
+  <footer class="footer-nav">
+    <button class="footer-btn" id="reportAdverseBtn">
+      <span class="footer-icon">⚠</span>
+      <span id="reportAdverseLabel">Report side effect</span>
+    </button>
+    <button class="footer-btn" id="settingsBtn">
+      <span class="footer-icon">⚙</span>
+      <span id="settingsLabel">Settings</span>
+    </button>
+  </footer>
+
+  <div class="legal-footer">
+    <p>
+      <a href="terms.html" target="_blank" id="footerTermsLink">Terms</a> ·
+      <a href="privacy.html" target="_blank" id="footerPrivacyLink">Privacy</a> ·
+      <a href="about.html" target="_blank" id="footerSourcesLink">Sources</a>
+    </p>
+    <p class="version" id="footerVersion">v0.1.0</p>
+  </div>
+
+  <script src="api-contract.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

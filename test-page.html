@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Evigrade Meds – test page</title>
+  <link rel="stylesheet" href="welcome.css">
+  <style>
+    .container { padding: 32px 40px; max-width: 920px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
+    @media (max-width: 800px) { .row { grid-template-columns: 1fr; } }
+
+    .input-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 20px; }
+    .input-card h2 { font-size: 14px; margin-bottom: 10px; color: #1d1d1f; }
+    .input-card label { display: block; font-size: 12px; color: #6e6e73; margin-bottom: 4px; margin-top: 10px; }
+    .input-card input, .input-card select { width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #d2d2d7; font-size: 13px; }
+    .input-card button { background: #0b4e8a; color: #fff; border: 0; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 14px; }
+    .input-card button:hover { background: #103a66; }
+    .input-card .examples { margin-top: 14px; padding-top: 14px; border-top: 1px solid #e2e8f0; font-size: 12px; color: #6e6e73; }
+    .input-card .examples button { background: #fff; color: #0b4e8a; border: 1px solid #d2d2d7; padding: 5px 10px; margin: 4px 6px 0 0; font-size: 11px; font-weight: 500; }
+
+    .result-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0; overflow: hidden; min-height: 320px; }
+    .result-empty { padding: 40px 24px; text-align: center; color: #94a3b8; font-size: 13px; }
+
+    .info-block { background: #fef3c7; border-left: 4px solid #d97706; padding: 14px 18px; border-radius: 8px; margin-top: 24px; font-size: 13px; color: #422006; line-height: 1.6; }
+    .info-block strong { display: block; margin-bottom: 4px; }
+    code { background: #f1f5f9; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header style="text-align: left; margin-bottom: 8px;">
+      <h1 style="font-size: 22px;">Evigrade Meds – developer QA tool</h1>
+      <p class="meta" style="color: #6e6e73; font-size: 12px;">Internal page for developers and legal reviewers. Not linked from the extension UI. Lookups still require the user to have accepted the legal notice in the welcome screen.</p>
+    </header>
+
+    <div class="row">
+      <div class="input-card">
+        <h2>Lookup input</h2>
+
+        <label for="titleInput">Product title (as it would appear on a retailer page)</label>
+        <input id="titleInput" type="text" placeholder="e.g. Now Foods, Ashwagandha, 450 mg, 90 Veg Capsules" autocomplete="off">
+
+        <label for="localeSelect">Locale</label>
+        <select id="localeSelect">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="ru">Русский</option>
+        </select>
+
+        <button id="runLookupBtn">Run lookup</button>
+
+        <div class="examples">
+          Try one of the seeded ingredients:
+          <div id="exampleButtons"></div>
+        </div>
+      </div>
+
+      <div class="result-card" id="resultPanel">
+        <div class="result-empty">Lookup result will render here.</div>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <strong>How this page works</strong>
+      <p>1. The page calls <code>chrome.runtime.sendMessage({type: 'LOOKUP', payload})</code>, exactly like <code>content/detector.js</code> does on iHerb / Amazon / VitaminShoppe.</p>
+      <p>2. The background service worker calls <code>evigrade.com/api/meds/lookup</code> with a 7-day LRU cache in <code>chrome.storage.local</code>. Repeat lookups for the same product return instantly from cache.</p>
+      <p>3. The result is rendered using the same overlay template (<code>content/overlay.html</code>) that ships on retailer pages.</p>
+    </div>
+
+    <footer style="margin-top: 32px;">
+      <p style="color: #94a3b8; font-size: 12px;">
+        <a href="welcome.html" style="color: #64748b;">Welcome</a> ·
+        <a href="terms.html" style="color: #64748b;">Terms</a> ·
+        <a href="privacy.html" style="color: #64748b;">Privacy</a> ·
+        <a href="about.html" style="color: #64748b;">Sources</a> ·
+        <a href="settings.html" style="color: #64748b;">Settings</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="test-page.js"></script>
+</body>
+</html>

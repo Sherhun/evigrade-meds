@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Política de Privacidad · Evigrade Meds</title>
+  <link rel="stylesheet" href="welcome.css">
+  <style>
+    .container { padding: 32px 40px; max-width: 820px; }
+    h2 { font-size: 18px; margin: 24px 0 10px; color: #1d1d1f; }
+    h3 { font-size: 15px; margin: 14px 0 6px; color: #1d1d1f; }
+    p, li { font-size: 14px; color: #1f2937; line-height: 1.7; }
+    ul, ol { padding-left: 22px; margin: 8px 0 12px; }
+    .meta { color: #6e6e73; font-size: 12px; margin-bottom: 24px; }
+    .toc { background: #f8fafc; border-radius: 10px; padding: 16px 20px; margin: 16px 0 32px; border: 1px solid #e2e8f0; }
+    .toc h3 { margin-top: 0; }
+    .toc ol { padding-left: 18px; }
+    .toc a { color: #2563eb; text-decoration: none; font-size: 13px; }
+    .toc a:hover { text-decoration: underline; }
+    .lang-switcher { font-size: 12px; margin-bottom: 16px; }
+    .lang-switcher a { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header style="text-align: left; margin-bottom: 20px;">
+      <p class="lang-switcher"><a href="privacy.html">English version</a> · <a href="privacy.ru.html">Русская версия</a></p>
+      <h1>Política de Privacidad</h1>
+      <p class="meta">Versión 1.0 · Vigente desde 2026-05-22 · Última actualización 2026-07-30</p>
+    </header>
+
+    <p class="meta" style="margin-bottom: 24px;">Traducción al español de la versión autoritativa en inglés (<a href="privacy.html">privacy.html</a>). En caso de discrepancia material, prevalece la versión inglesa hasta que esta traducción reciba revisión legal cualificada.</p>
+
+    <div id="content">
+      <div class="toc">
+        <h3>Contenido</h3>
+        <ol>
+          <li><a href="#controller">Responsable del tratamiento</a></li>
+          <li><a href="#what">Qué datos se tratan</a></li>
+          <li><a href="#legal-basis">Base jurídica (RGPD Art. 6)</a></li>
+          <li><a href="#special">Categorías especiales (RGPD Art. 9)</a></li>
+          <li><a href="#retention">Conservación de datos</a></li>
+          <li><a href="#third-parties">Terceros</a></li>
+          <li><a href="#international">Transferencias internacionales</a></li>
+          <li><a href="#rights">Sus derechos</a></li>
+          <li><a href="#complaints">Derecho a presentar reclamación</a></li>
+          <li><a href="#ccpa">Residentes en California (CCPA)</a></li>
+          <li><a href="#children">Menores</a></li>
+          <li><a href="#changes">Cambios en esta Política</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ol>
+      </div>
+
+      <h2 id="controller">1. Responsable del tratamiento</h2>
+      <p>Esta Política de Privacidad se aplica a Evigrade Meds, una extensión del navegador Chrome operada por Evigrade («nosotros», «nuestro»). A los efectos del Reglamento General de Protección de Datos de la Unión Europea (Reglamento (UE) 2016/679, «RGPD»), de la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD) y de regulaciones equivalentes, el responsable del tratamiento es:</p>
+      <ul>
+        <li><strong>Prestador del servicio:</strong> Viktoriya Gankova, profesional autónoma, que opera el servicio Evigrade Meds («Evigrade»). Prestador establecido fuera de la Unión Europea, en Ereván, República de Armenia. Una entidad legal dedicada está en proceso de constitución; esta Política de Privacidad se actualizará cuando se complete la inscripción.</li>
+        <li><strong>Contacto de privacidad:</strong> gankova.vik@gmail.com</li>
+        <li><strong>Contacto legal:</strong> legal@evigrade.com</li>
+        <li><strong>Dirección postal:</strong> disponible bajo solicitud escrita al contacto de privacidad indicado arriba</li>
+      </ul>
+
+      <h2 id="what">2. Qué datos se tratan</h2>
+
+      <h3>2.1 Datos que NO recogemos</h3>
+      <p>No recogemos, almacenamos ni transmitimos a nuestros servidores:</p>
+      <ul>
+        <li>Su nombre, dirección, teléfono u otra información de identificación directa (salvo que cree una cuenta Evigrade para funciones Pro)</li>
+        <li>Las direcciones de las páginas que visita ni su historial de navegación</li>
+        <li>Su historial médico, diagnósticos ni información del profesional sanitario (el indicador de embarazo / lactancia se trata en los apartados 2.3 y 4)</li>
+        <li>El contenido de las listas que crea dentro de la extensión (alérgenos, medicación personal) – permanece en su dispositivo</li>
+      </ul>
+
+      <h3>2.2 Datos tratados localmente en su dispositivo</h3>
+      <p>Los siguientes datos se almacenan mediante la API <code>chrome.storage.sync</code> y permanecen en su dispositivo (Chrome puede sincronizarlos entre los dispositivos en los que haya iniciado sesión, regido por la política de privacidad de Google):</p>
+      <ul>
+        <li>Preferencia de idioma</li>
+        <li>Preferencia de región (si elige una)</li>
+        <li>Aceptación de los Términos de Servicio y la Política de Privacidad con marca temporal y versión</li>
+        <li>Nivel de suscripción (Free / Pro / Profesional), si dispone de una cuenta Evigrade</li>
+        <li>Lista personal de alérgenos e intolerancias (función Pro, opt-in)</li>
+        <li>Indicador de embarazo / lactancia (función Pro, opt-in). Permanece en su dispositivo mientras usa la extensión de forma anónima; si inicia sesión y activa la sincronización entre dispositivos, se guarda una copia en nuestros servidores – véase el apartado 2.3</li>
+        <li>Lista personal de medicación para Pro Drug Interaction Reference (función Pro, opt-in) – tratamiento únicamente local</li>
+      </ul>
+
+      <h3>2.3 Datos tratados en nuestros servidores (solo si crea una cuenta Evigrade)</h3>
+      <ul>
+        <li>Dirección de correo electrónico (para autenticación de la cuenta)</li>
+        <li>Identificador del cliente en el procesador de pagos (YooKassa, Stripe u otro; no almacenamos datos de tarjetas)</li>
+        <li>Indicadores de embarazo y lactancia, solo si inicia sesión y activa la sincronización entre dispositivos. Se guardan bajo consentimiento explícito (RGPD art. 9.2.a) junto con la versión del texto de consentimiento. Puede borrar la copia del servidor con un clic desde la página de su cuenta</li>
+        <li>Estado e historial de la suscripción</li>
+      </ul>
+
+      <h3>2.4 Analítica</h3>
+      <p>La extensión puede recoger estadísticas de uso anónimas: activaciones, clics por elemento de la interfaz y la ficha del catálogo que ha coincidido con la página abierta (por ejemplo, «ashwagandha»). Así sabemos qué sustancias busca la gente en realidad y qué conviene añadir al catálogo. Se vincula a un identificador aleatorio de instalación, nunca a su nombre ni a su cuenta, y no incluye las direcciones de las páginas ni su historial de navegación. Puede desactivarlo en Ajustes.</p>
+      <p>Una vez al día, mientras el navegador está en marcha, la extensión envía además una señal de que la instalación sigue activa. Incluye el mismo identificador aleatorio de instalación, la versión de la extensión y el idioma de la interfaz, nada más. Sirve para distinguir una instalación activa de una eliminada sin seguir lo que usted hace. Al desactivar la analítica en Ajustes también se detiene esta señal. Los eventos que no se han podido enviar se guardan en su dispositivo hasta 30 días para reintentarlos y después se descartan.</p>
+
+      <h2 id="legal-basis">3. Base jurídica del tratamiento (RGPD Art. 6)</h2>
+      <ul>
+        <li><strong>Ejecución del contrato (Art. 6.1.b)</strong> – tratamiento de los datos de la cuenta y de la información de suscripción necesarios para prestar las funciones Pro</li>
+        <li><strong>Consentimiento explícito (Art. 6.1.a)</strong> – analítica opcional; activadores opt-in para embarazo, lactancia y lista de alérgenos</li>
+        <li><strong>Interés legítimo (Art. 6.1.f)</strong> – seguridad, prevención de abuso y funcionamiento técnico de la extensión</li>
+        <li><strong>Obligación legal (Art. 6.1.c)</strong> – conservación de registros con fines fiscales y de protección al consumidor</li>
+      </ul>
+
+      <h2 id="special">4. Categorías especiales de datos (RGPD Art. 9)</h2>
+      <p>La información sobre embarazo, lactancia, alérgenos y listas personales de medicación constituye categoría especial de datos relativos a la salud según el Art. 9 del RGPD. Tratamos estos datos con la siguiente base:</p>
+      <ul>
+        <li><strong>Consentimiento explícito (Art. 9.2.a)</strong> – debe activar afirmativamente cada interruptor relevante antes de que se registre ese dato</li>
+        <li>La lista de alérgenos y la lista personal de medicación se almacenan <strong>únicamente en local en su dispositivo</strong> y nunca se transmiten a nuestros servidores</li>
+        <li>Los indicadores de embarazo y lactancia también permanecen en su dispositivo mientras usa la extensión de forma anónima. Si inicia sesión y activa la sincronización entre dispositivos, se guarda una copia en nuestros servidores bajo el mismo consentimiento explícito, junto con la versión del texto de consentimiento. Puede borrar la copia del servidor con un clic desde la página de su cuenta (derecho de supresión)</li>
+        <li>La función Pro Drug Interaction Reference procesa su lista de medicación localmente; la lista no se envía a nuestro back-end</li>
+      </ul>
+
+      <h2 id="retention">5. Conservación de datos</h2>
+      <ul>
+        <li><strong>Datos almacenados localmente:</strong> se conservan hasta que desinstala la extensión o los borra manualmente</li>
+        <li><strong>Datos de cuenta:</strong> se conservan mientras la cuenta esté activa más seis (6) años tras su cierre por obligaciones fiscales y contables, según la normativa aplicable</li>
+        <li><strong>Registro de aceptación (Términos / Privacidad):</strong> se conserva mientras la extensión esté instalada; necesario como prueba de consentimiento conforme al Art. 7.1 del RGPD</li>
+      </ul>
+
+      <h2 id="third-parties">6. Terceros</h2>
+      <p>Trabajamos con los siguientes encargados del tratamiento, todos ellos sujetos a contratos de tratamiento de datos (DPA):</p>
+      <ul>
+        <li><strong>Hosting:</strong> Vercel Inc. (Estados Unidos) – alojamiento del sitio web y de la API</li>
+        <li><strong>Base de datos:</strong> Neon Inc. (Estados Unidos / UE) – base de datos de contenido</li>
+        <li><strong>Procesamiento de pagos:</strong> YooKassa (Rusia, para RUB), Stripe / FastSpring o equivalente (Estados Unidos o UE, para otras divisas)</li>
+        <li><strong>Correo electrónico:</strong> Cloudflare Email Routing para las direcciones legal@ y gankova.vik@</li>
+      </ul>
+      <p>No vendemos, alquilamos, cedemos ni compartimos datos personales con anunciantes, intermediarios de datos, aseguradoras, empleadores ni fabricantes farmacéuticos.</p>
+
+      <h2 id="international">7. Transferencias internacionales</h2>
+      <p>Si sus datos se transfieren fuera del Espacio Económico Europeo (por ejemplo, a encargados con sede en Estados Unidos), nos basamos en las Cláusulas Contractuales Tipo (SCC) aprobadas por la Comisión Europea y, cuando proceda, en el EU-U.S. Data Privacy Framework (DPF). Puede solicitar copia de las garantías aplicables contactando con nosotros.</p>
+
+      <h2 id="rights">8. Sus derechos (RGPD Art. 15–22)</h2>
+      <p>Conforme al RGPD y a la LOPDGDD, usted tiene derecho a:</p>
+      <ul>
+        <li><strong>Acceso (Art. 15)</strong> – obtener copia de sus datos personales</li>
+        <li><strong>Rectificación (Art. 16)</strong> – corregir datos inexactos</li>
+        <li><strong>Supresión (Art. 17)</strong> – solicitar la eliminación de sus datos</li>
+        <li><strong>Limitación del tratamiento (Art. 18)</strong></li>
+        <li><strong>Portabilidad (Art. 20)</strong> – recibir sus datos en un formato estructurado y legible por máquina</li>
+        <li><strong>Oposición (Art. 21)</strong> – al tratamiento basado en el interés legítimo</li>
+        <li><strong>Retirar el consentimiento (Art. 7.3)</strong> – en cualquier momento, sin que ello afecte a la licitud del tratamiento previo</li>
+        <li><strong>No ser objeto de decisiones automatizadas (Art. 22)</strong> – no realizamos ese tipo de tratamiento</li>
+      </ul>
+      <p>Para ejercer cualquiera de estos derechos, escríbanos a gankova.vik@gmail.com. Responderemos en los treinta (30) días siguientes, conforme exige el Art. 12.3 del RGPD.</p>
+
+      <h2 id="complaints">9. Derecho a presentar reclamación (RGPD Art. 77)</h2>
+      <p>Tiene derecho a presentar reclamación ante la autoridad de control de su Estado miembro de residencia, lugar de trabajo o lugar de la presunta infracción. En España es la <a href="https://www.aepd.es/" target="_blank" rel="noopener">Agencia Española de Protección de Datos (AEPD)</a>. El directorio de autoridades de control de la UE lo mantiene el <a href="https://edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank" rel="noopener">Comité Europeo de Protección de Datos (EDPB)</a>.</p>
+
+      <h2 id="ccpa">10. Residentes en California (CCPA / CPRA)</h2>
+      <p>Si reside en California, dispone de derechos adicionales bajo la California Consumer Privacy Act (CCPA) y la California Privacy Rights Act (CPRA), incluidos el derecho a conocer, a suprimir, a rectificar y a oponerse a la venta o cesión de datos personales. No vendemos ni compartimos datos personales en el sentido de estas normas. Para ejercer sus derechos, escriba a gankova.vik@gmail.com.</p>
+
+      <h2 id="children">11. Menores</h2>
+      <p>Evigrade Meds no se dirige a menores de dieciséis (16) años en el Espacio Económico Europeo ni a menores de trece (13) años en Estados Unidos. No recogemos conscientemente datos de menores. Si cree que un menor nos ha facilitado datos personales, póngase en contacto con nosotros para eliminarlos.</p>
+
+      <h2 id="changes">12. Cambios en esta Política</h2>
+      <p>Notificaremos cualquier cambio material en esta Política de Privacidad con al menos treinta (30) días de antelación, a través de la notificación de actualización de la extensión y de un aviso en la pantalla de bienvenida. Para cambios materiales que afecten a sus derechos, podrá requerirse una nueva aceptación para continuar utilizando la extensión.</p>
+
+      <h2 id="contact">13. Contacto</h2>
+      <ul>
+        <li><strong>Consultas generales de privacidad:</strong> gankova.vik@gmail.com</li>
+        <li><strong>Avisos legales:</strong> legal@evigrade.com</li>
+        <li><strong>Dirección postal:</strong> disponible bajo solicitud escrita al contacto de privacidad indicado arriba; el prestador está actualmente establecido en Ereván, República de Armenia (fuera de la Unión Europea)</li>
+      </ul>
+    </div>
+
+    <footer style="margin-top: 40px; text-align: left;">
+      <p class="meta">© 2026 Evigrade · <a href="terms.html">Términos de Servicio</a> · <a href="about.es.html">Fuentes</a></p>
+    </footer>
+  </div>
+
+</body>
+</html>

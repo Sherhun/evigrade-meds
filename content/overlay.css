@@ -1,0 +1,65 @@
+#__evigrade-meds-fab {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 2147483646 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+#__evigrade-meds-fab .emfab__button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: #0b4e8a !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 10px 16px 10px 12px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18) !important;
+  letter-spacing: 0.01em !important;
+}
+
+#__evigrade-meds-fab.emfab--nomatch .emfab__button {
+  background: #475569 !important;
+}
+
+#__evigrade-meds-fab .emfab__button:hover {
+  filter: brightness(1.08) !important;
+}
+
+#__evigrade-meds-fab .emfab__button img {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 6px !important;
+  display: block !important;
+}
+
+#__evigrade-meds-fab .emfab__label {
+  white-space: nowrap !important;
+  max-width: 280px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#__evigrade-meds-panel {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 420px !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  z-index: 2147483647 !important;
+  background: #fff !important;
+  box-shadow: -8px 0 28px rgba(0,0,0,0.18) !important;
+}
+
+#__evigrade-meds-panel iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block !important;
+}

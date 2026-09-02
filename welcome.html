@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evigrade Meds</title>
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <div class="logo-icon">M</div>
+      <div class="logo-text">Evigrade Meds</div>
+    </div>
+
+    <div class="lang-bar">
+      <span class="lang-bar-label" id="langPrompt">Выберите язык</span>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="ru" type="button">Русский</button>
+        <button class="lang-btn" data-lang="en" type="button">English</button>
+        <button class="lang-btn" data-lang="es" type="button">Español</button>
+      </div>
+    </div>
+
+    <div class="lang-bar">
+      <span class="lang-bar-label" id="healthPrompt">Особые состояния (если есть)</span>
+      <div class="lang-switch">
+        <button class="health-btn" data-health="pregnancy" type="button" id="healthPregBtn">Беременность</button>
+        <button class="health-btn" data-health="lactation" type="button" id="healthLactBtn">Лактация</button>
+      </div>
+    </div>
+
+    <h1 id="welcomeTitle">Расширение установлено</h1>
+    <p class="lead" id="welcomeLead">Справочник по препаратам и БАДам со ссылками на регуляторные источники.</p>
+
+    <div class="info-row">
+      <div class="info-card">
+        <div class="info-card-title" id="card1Title">Что вы увидите</div>
+        <div class="info-card-desc" id="card1Desc">Категория, профиль безопасности при беременности и лактации, ссылки на FDA, EMA, NIH ODS и Cochrane.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title" id="card2Title">Что мы не делаем</div>
+        <div class="info-card-desc" id="card2Desc">Не даем медицинских рекомендаций. Не назначаем лечение. Не заменяем консультацию врача или фармацевта.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title" id="card3Title">Откуда данные</div>
+        <div class="info-card-desc" id="card3Desc">Только регуляторы и рецензируемые публикации. Каждый факт подписан источником и датой проверки.</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <div class="step-title" id="step1Title">Откройте товар на iHerb, Amazon или VitaminShoppe</div>
+          <div class="step-desc" id="step1Desc">Магазины из списка ниже. Карточка товара любого supplement.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <div class="step-title" id="step2Title">Внизу справа появится плавающая кнопка</div>
+          <div class="step-desc" id="step2Desc">С названием ингредиента, если он в нашей базе.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <div class="step-title" id="step3Title">Нажмите – откроется карточка</div>
+          <div class="step-desc" id="step3Desc">Источники, профиль безопасности, ссылка на полную страницу evigrade.com.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stores">
+      <div class="stores-title" id="storesTitle">Поддерживаемые магазины</div>
+      <div class="stores-list">
+        <span>iHerb</span><span class="dot">·</span>
+        <span>Amazon Supplements</span><span class="dot">·</span>
+        <span>VitaminShoppe</span>
+      </div>
+      <div class="stores-note" id="storesNote">Список расширяем по мере добавления селекторов.</div>
+    </div>
+
+    <div class="cta-row">
+      <a href="https://www.iherb.com/" target="_blank" rel="noopener noreferrer" class="cta cta-primary" data-cta="primary" id="ctaPrimary">Открыть iHerb</a>
+      <a href="https://www.evigrade.com/ru/ingredients" target="_blank" rel="noopener noreferrer" class="cta cta-secondary" id="ctaSecondary">Каталог на evigrade.com</a>
+    </div>
+
+    <div class="legal-bar">
+      <label class="check-row">
+        <input type="checkbox" id="acceptCheckbox">
+        <span id="acceptText">Принимаю <a href="terms.html" target="_blank">Условия использования</a> и <a href="privacy.html" target="_blank">Политику конфиденциальности</a>. Понимаю, что Evigrade Meds дает только справочную информацию и не заменяет консультацию врача.</span>
+      </label>
+      <div class="legal-hint" id="legalHint">Без подтверждения кнопки выше остаются неактивными. Это требование для медицинских справочников.</div>
+    </div>
+
+    <div class="sources-strip">
+      <span class="sources-strip-label" id="sourcesLabel">Источники:</span>
+      <span id="sourcesValue">ГРЛС Минздрава РФ · FDA · EMA · AEMPS · MHRA · Cochrane · NIH ODS · NICE · WHO · LactMed</span>
+    </div>
+
+    <div class="non-affiliation-bar" id="nonAffiliationBar">
+      Evigrade не связан с FDA, EMA, AEMPS, MHRA, Минздравом РФ, ВОЗ или каким-либо ретейлером (iHerb, Amazon, VitaminShoppe и др.), отображаемым в расширении. Все товарные знаки принадлежат их правообладателям.
+    </div>
+
+    <div class="footer">
+      <span id="footerVersion">Правовое уведомление v1.0 · 22.05.2026</span>
+      <span class="footer-links">
+        <a href="terms.html" target="_blank" id="footerTerms">Условия</a> ·
+        <a href="privacy.html" target="_blank" id="footerPrivacy">Конфиденциальность</a> ·
+        <a href="about.html" target="_blank" id="footerAbout">Источники</a>
+      </span>
+    </div>
+  </div>
+
+  <script src="api-contract.js"></script>
+  <script src="welcome.js"></script>
+</body>
+</html>

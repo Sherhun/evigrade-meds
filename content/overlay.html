@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Evigrade Meds</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1d1d1f; background: #fff; font-size: 14px; line-height: 1.5; }
+    .panel { display: flex; flex-direction: column; height: 100vh; }
+    header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid #e2e8f0; background: #fff; flex-shrink: 0; }
+    header img { width: 28px; height: 28px; border-radius: 6px; }
+    header h1 { font-size: 14px; font-weight: 600; flex: 1; }
+    header button { background: transparent; border: 0; cursor: pointer; font-size: 20px; color: #94a3b8; padding: 4px 10px; line-height: 1; }
+    header button:hover { color: #1d1d1f; }
+
+    .disclaimer-bar { background: #fef3c7; color: #422006; padding: 8px 18px; font-size: 11px; line-height: 1.4; border-bottom: 1px solid #fde68a; flex-shrink: 0; }
+
+    main { flex: 1; overflow-y: auto; padding: 18px; }
+
+    .product-title { font-size: 12px; color: #6e6e73; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .product-name { font-size: 16px; font-weight: 600; color: #1d1d1f; margin-bottom: 14px; line-height: 1.35; }
+
+    .ingredient-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; }
+    .ingredient-card h2 { font-size: 17px; margin-bottom: 4px; }
+    .ingredient-card .latin { color: #6e6e73; font-style: italic; font-size: 13px; }
+    .ingredient-card .category { display: inline-block; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; margin-top: 8px; }
+
+    .section { margin-bottom: 18px; }
+    .section h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #6e6e73; margin-bottom: 8px; font-weight: 600; }
+
+    .preg-row { display: block; padding: 12px 14px; border-radius: 10px; margin-bottom: 8px; font-size: 13px; }
+    .preg-row.status-contraindicated, .preg-row.status-likely_unsafe { background: #fef2f2; border: 1px solid #fecaca; color: #7f1d1d; }
+    .preg-row.status-monitor, .preg-row.status-insufficient_data, .preg-row.status-limited_data { background: #fef3c7; border: 1px solid #fde68a; color: #78350f; }
+    .preg-row.status-compatible, .preg-row.status-likely_safe, .preg-row.status-compatible_within_ul, .preg-row.status-generally_compatible { background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
+    .preg-row-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .preg-row .preg-label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .preg-row .preg-dismiss { background: transparent; border: 0; color: inherit; opacity: 0.4; cursor: pointer; font-size: 18px; line-height: 1; padding: 0 4px; }
+    .preg-row .preg-dismiss:hover { opacity: 1; }
+    .preg-row .preg-status-line { font-size: 14px; margin-bottom: 4px; }
+    .preg-row .preg-source-link { display: inline-block; color: inherit; text-decoration: underline; font-size: 12px; }
+
+    .indications-section .indications-list { list-style: none; margin: 0; padding: 0; }
+    .indication-row { padding: 10px 12px; border-radius: 8px; margin-bottom: 6px; background: #f8fafc; border: 1px solid #e2e8f0; }
+    .indication-row.tier-A, .indication-row.tier-B { background: #ecfdf5; border-color: #a7f3d0; }
+    .indication-row.tier-C { background: #fef3c7; border-color: #fde68a; }
+    .indication-row.tier-D { background: #fff7ed; border-color: #fed7aa; }
+    .indication-row.tier-F { background: #fef2f2; border-color: #fecaca; }
+    .indication-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+    .indication-name { font-size: 13px; font-weight: 600; color: #1d1d1f; line-height: 1.35; }
+    .evidence-badge { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 6px; font-size: 11px; font-weight: 700; line-height: 1; cursor: help; }
+    .evidence-badge.badge-A { background: #059669; color: #fff; }
+    .evidence-badge.badge-B { background: #10b981; color: #fff; }
+    .evidence-badge.badge-C { background: #f59e0b; color: #fff; }
+    .evidence-badge.badge-D { background: #ea580c; color: #fff; }
+    .evidence-badge.badge-F { background: #dc2626; color: #fff; }
+    .indication-summary { font-size: 12px; color: #475569; line-height: 1.45; margin: 0; }
+    .indications-more { display: inline-block; margin-top: 6px; font-size: 12px; color: #1d4ed8; text-decoration: none; font-weight: 500; }
+    .indications-more:hover { text-decoration: underline; }
+
+    .dose-section { padding: 14px; border-radius: 10px; border-left: 4px solid; }
+    .dose-section.dose-red { background: #fef2f2; border-color: #dc2626; }
+    .dose-section.dose-amber { background: #fffbeb; border-color: #f59e0b; }
+    .dose-section h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; font-weight: 700; }
+    .dose-section.dose-red h3 { color: #7f1d1d; }
+    .dose-section.dose-amber h3 { color: #78350f; }
+    .dose-tag { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
+    .dose-section.dose-red .dose-tag { background: #fee2e2; color: #991b1b; }
+    .dose-section.dose-amber .dose-tag { background: #fef3c7; color: #92400e; }
+    .dose-numbers { background: rgba(255,255,255,0.55); border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; }
+    .dose-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; font-size: 13px; }
+    .dose-row + .dose-row { border-top: 1px solid rgba(0,0,0,0.06); }
+    .dose-label { color: #475569; font-weight: 500; }
+    .dose-section.dose-red .dose-row-ul .dose-value { color: #b91c1c; font-weight: 700; }
+    .dose-section.dose-amber .dose-row-ul .dose-value { color: #b45309; font-weight: 700; }
+    .dose-value { color: #1d1d1f; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .dose-sources { margin-bottom: 10px; }
+    .dose-source-line { font-size: 11px; color: #475569; line-height: 1.45; margin: 0 0 4px; }
+    .dose-source-tag { font-weight: 600; color: #1e293b; }
+    .dose-toxicity, .dose-bolus { padding-top: 10px; border-top: 1px dashed rgba(0,0,0,0.12); margin-top: 10px; }
+    .dose-toxicity h4, .dose-bolus h4 { font-size: 12px; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .dose-section.dose-red .dose-toxicity h4 { color: #991b1b; }
+    .dose-section.dose-amber .dose-toxicity h4 { color: #92400e; }
+    .dose-bolus h4 { color: #1e3a8a; }
+    .dose-toxicity p, .dose-bolus p { font-size: 12.5px; line-height: 1.55; color: #1e293b; margin: 0; }
+
+    .self-med-disclaimer { background: #f1f5f9; border-radius: 10px; padding: 12px 14px; margin: 14px 0; }
+    .self-med-disclaimer p { font-size: 12px; color: #334155; line-height: 1.55; margin: 0; }
+
+    .ingredient-tabs { display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 14px; max-height: 124px; overflow-y: auto; }
+    .ingredient-tab { background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; padding: 7px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 500; cursor: pointer; font-family: inherit; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ingredient-tab:hover { background: #e2e8f0; color: #0f172a; }
+    .ingredient-tab.is-active { background: #0b4e8a; border-color: #0b4e8a; color: #fff; font-weight: 600; }
+    .ingredient-tab.is-active:hover { background: #093e6f; }
+
+    .manual-search { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; margin: 16px 0; }
+    .manual-search h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 4px; font-weight: 700; }
+    .manual-search-hint { font-size: 12px; color: #64748b; line-height: 1.5; margin: 0 0 10px; }
+    .manual-search-form { display: flex; gap: 6px; }
+    .manual-search-input { flex: 1; min-width: 0; padding: 8px 11px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; font-family: inherit; color: #1d1d1f; background: #fff; }
+    .manual-search-input:focus { outline: 2px solid #0b4e8a; outline-offset: -1px; border-color: #0b4e8a; }
+    .manual-search-submit { background: #0b4e8a; color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; }
+    .manual-search-submit:hover { background: #093e6f; }
+    .manual-search.is-loading .manual-search-submit { opacity: 0.6; pointer-events: none; }
+    .manual-search-error { font-size: 12px; color: #b91c1c; margin: 8px 0 0; }
+
+    .health-toggle { background: transparent; border-top: 1px solid #e2e8f0; border-radius: 0; padding: 14px 0 4px; margin: 18px 0 8px; }
+    .health-toggle-hint { color: #6e6e73; font-size: 12px; margin-bottom: 8px; line-height: 1.5; }
+    .health-toggle-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .health-toggle-btn { background: #fff; border: 1px solid #d2d2d7; color: #6e6e73; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; cursor: pointer; }
+    .health-toggle-btn:hover { border-color: #db2777; color: #db2777; }
+
+    .sources-list { list-style: none; }
+    .sources-list li { padding: 8px 0; border-bottom: 1px solid #e2e8f0; font-size: 13px; }
+    .sources-list li:last-child { border-bottom: 0; }
+    .sources-list a { color: #1d4ed8; text-decoration: none; font-weight: 500; }
+    .sources-list a:hover { text-decoration: underline; }
+    .sources-list .source-type { display: block; font-size: 11px; color: #94a3b8; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .sources-list .checked { display: block; font-size: 10px; color: #cbd5e1; margin-top: 2px; }
+
+    .interactions { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #78350f; }
+    .interactions strong { display: block; margin-bottom: 4px; }
+    .interactions .interactions-disclaimer { display: block; font-style: italic; font-size: 11.5px; color: #92400e; margin: 0 0 6px; line-height: 1.4; }
+    .interactions a { color: inherit; text-decoration: underline; }
+
+    .waitlist-teaser { background: linear-gradient(135deg, #0b4e8a 0%, #1e3a8a 100%); color: #fff; border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+    .waitlist-teaser .wl-badge { display: inline-block; background: rgba(255,255,255,0.18); padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .waitlist-teaser h3 { font-size: 15px; margin-bottom: 6px; color: #fff; font-weight: 600; }
+    .waitlist-teaser p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; margin-bottom: 12px; }
+    .waitlist-cta { background: #fff; color: #0b4e8a; border: 0; border-radius: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .waitlist-cta:hover { background: #f1f5f9; }
+    .waitlist-form { display: none; margin-top: 10px; flex-direction: column; gap: 8px; }
+    .waitlist-form.visible { display: flex; }
+    .waitlist-form input { padding: 9px 12px; border-radius: 8px; border: 0; font-size: 13px; font-family: inherit; }
+    .waitlist-form .wl-submit { background: #fff; color: #0b4e8a; border: 0; border-radius: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .waitlist-form .wl-submit[disabled] { opacity: 0.5; cursor: not-allowed; }
+    .waitlist-form .wl-note { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .waitlist-form .wl-consent { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; color: rgba(255,255,255,0.85); line-height: 1.5; cursor: pointer; }
+    .waitlist-form .wl-consent input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+    .waitlist-form .wl-consent a { color: #fff; text-decoration: underline; }
+    .waitlist-success { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; font-size: 13px; color: #fff; margin-top: 10px; }
+    .waitlist-success.visible { display: block; }
+    .waitlist-success { display: none; }
+    .waitlist-error { color: #fecaca; font-size: 12px; margin-top: 4px; }
+
+    .full-card-link { display: block; text-align: center; background: #1d1d1f; color: #fff; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: 600; font-size: 13px; margin-top: 8px; }
+    .full-card-link:hover { background: #2c2c2e; }
+
+    .empty-state { padding: 28px 12px; text-align: center; }
+    .empty-state h2 { font-size: 16px; margin-bottom: 8px; }
+    .empty-state p { color: #6e6e73; font-size: 13px; margin-bottom: 14px; }
+    .empty-state .search-link { color: #1d4ed8; text-decoration: underline; font-size: 13px; }
+
+    .per-card-disclaimer { font-size: 11px; color: #6e6e73; padding: 12px 14px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; margin-top: 14px; line-height: 1.5; }
+    .per-card-disclaimer strong { color: #422006; }
+
+    footer { padding: 10px 16px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; position: relative; }
+    footer button { background: #fff; border: 1px solid #d2d2d7; color: #1d1d1f; padding: 8px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; font-weight: 500; }
+    footer button:hover { background: #f1f5f9; }
+    footer .links a { color: #94a3b8; text-decoration: none; font-size: 11px; margin-right: 8px; }
+    footer .links a:hover { color: #1d1d1f; text-decoration: underline; }
+
+    .adverse-popover { position: absolute; left: 16px; bottom: calc(100% + 6px); width: 280px; background: #fff; border: 1px solid #d2d2d7; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; z-index: 10; }
+    .adverse-popover[hidden] { display: none; }
+    .adverse-popover-title { font-size: 11px; color: #6e6e73; padding: 8px 10px 4px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+    .adverse-option { display: block; width: 100%; text-align: left; background: transparent; border: 0; padding: 8px 10px; font-size: 13px; color: #1d1d1f; cursor: pointer; border-radius: 6px; font-family: inherit; }
+    .adverse-option:hover { background: #f1f5f9; }
+    .adverse-option.suggested { background: #eff6ff; color: #1d4ed8; font-weight: 600; }
+    .adverse-option .opt-authority { display: block; font-size: 11px; color: #6e6e73; font-weight: 400; margin-top: 2px; }
+    .adverse-option.suggested .opt-authority { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <header>
+      <img id="logo" alt="">
+      <h1 id="panelTitle">Evigrade Meds</h1>
+      <button id="closeBtn" aria-label="Close" type="button">×</button>
+    </header>
+
+    <div class="disclaimer-bar" id="disclaimerBar">
+      Educational reference only. Does not replace a healthcare professional.
+    </div>
+
+    <main id="content">
+      <div class="empty-state" id="loadingState">
+        <p>Loading…</p>
+      </div>
+    </main>
+
+    <footer>
+      <button id="adverseBtn" aria-haspopup="true" aria-expanded="false">Report side effect</button>
+      <div class="adverse-popover" id="adversePopover" hidden></div>
+      <div class="links">
+        <a href="#" id="sourcesLink" target="_blank">Sources</a>
+        <a href="#" id="termsLink" target="_blank">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="overlay.js"></script>
+</body>
+</html>
