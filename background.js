@@ -36,6 +36,8 @@ const lookupInflight = new Map();
 const FALLBACK_EVENT_URL = 'https://evigrade.vercel.app/api/extension/event';
 const PROD_EXTENSION_ID = 'anmacpbhhffljikchkcdcbajiopanjei';
 const QUEUE_MAX = 100;
+// Per-request cap for telemetry POSTs, see postTo().
+const POST_TIMEOUT_MS = 15000;
 
 const CHANNEL = (() => {
   try {
@@ -131,6 +133,9 @@ async function postTo(url, payload) {
     credentials: 'omit',
     referrer: '',
     mode: 'cors',
+    // A hung request would hold the queue lock below for as long as the
+    // worker lives, and every event behind it would die with the worker.
+    signal: AbortSignal.timeout(POST_TIMEOUT_MS),
   });
   return res.ok;
 }
@@ -163,23 +168,36 @@ async function writeQueue(queue) {
   } catch {}
 }
 
+// Every read-modify-write of the queue goes through this one chain. Without
+// it, two wake-ups at once (cold start + hourly alarm) replayed the same event
+// twice, and two failed sends at once overwrote each other in storage, losing
+// one of them. On 12 October 2026 the table held 37 such doubles from Meds.
+let queueChain = Promise.resolve();
+
+function withQueueLock(fn) {
+  const run = queueChain.then(fn);
+  queueChain = run.catch(() => {});
+  return run;
+}
+
 // Replay oldest first, stop at the first failure. No point burning the whole
 // backlog against a dead network, and cohort math needs install before use.
-async function flushQueue() {
-  if (await isOptedOut()) {
-    await writeQueue([]);
-    return;
-  }
-  const queue = await readQueue();
-  if (!queue.length) return;
-
-  const remaining = [...queue];
-  while (remaining.length) {
-    const ok = await deliver(remaining[0]);
-    if (!ok) break;
-    remaining.shift();
-  }
-  if (remaining.length !== queue.length) await writeQueue(remaining);
+// The queue is saved after every delivered event, so a worker killed halfway
+// does not resend on the next wake what already landed.
+function flushQueue() {
+  return withQueueLock(async () => {
+    if (await isOptedOut()) {
+      await writeQueue([]);
+      return;
+    }
+    const queue = await readQueue();
+    while (queue.length) {
+      const ok = await deliver(queue[0]);
+      if (!ok) break;
+      queue.shift();
+      await writeQueue(queue);
+    }
+  });
 }
 
 async function sendEvent(type, extra = {}) {
@@ -218,10 +236,12 @@ async function sendEvent(type, extra = {}) {
   await flushQueue();
 }
 
-async function enqueue(payload) {
-  const queue = await readQueue();
-  queue.push(payload);
-  await writeQueue(queue);
+function enqueue(payload) {
+  return withQueueLock(async () => {
+    const queue = await readQueue();
+    queue.push(payload);
+    await writeQueue(queue);
+  });
 }
 
 // One HEARTBEAT per calendar day. The alarm ticks hourly: a 24-hour period
